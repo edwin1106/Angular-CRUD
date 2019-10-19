@@ -1,12 +1,12 @@
 <div class="card">
         <div class="card-header">
-          <a [routerLink]="['/registro-persona']" class="btn btn-primary">Registrar persona</a>
+          <a [routerLink]="['/people-create']" class="btn btn-primary">Registrar persona</a>
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
             <div *ngIf="personas.length == 0">
               <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Lo sentimos!</strong> No existe información el sistemas.
+                <strong>Lo sentimos!</strong> No existe información en el sistema.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,6 +23,8 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
                     <th scope="col">Teléfono</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Tipo de documento</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -31,9 +33,11 @@
                     <th scope="row">{{persona.id}}</th>
                     <td>{{persona.nombre | uppercase}}</td>
                     <td>{{persona.apellido | uppercase}}</td>
+                    <td>{{persona.nroDocumento}}</td>
+                    <td>{{persona.tipoDocumentoIdentidad.nombre}}</td>
                     <td>{{persona.telefono}}</td>
                     <td><a href="#" class="btn btn-primary btn-lg">Editar</a>
-                      <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">Eliminar</button>
+                      <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" (click)="showModal(persona)">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -58,12 +62,12 @@
       
             <!-- Modal body -->
             <div class="modal-body">
-              ¿Está seguro que desea eliminar la información?
+              Está seguro que desea eliminar la información de {{personaSeleccionada.nombre | uppercase}} {{personaSeleccionada.apellido | uppercase}}
             </div>
       
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="eliminar(personaSeleccionada.id)">Aceptar</button>
             </div>
       
           </div>

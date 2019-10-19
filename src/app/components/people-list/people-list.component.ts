@@ -11,6 +11,8 @@ import {PersonaService} from '../../service/persona.service'
 export class PeopleListComponent implements OnInit {
 
   personas: Persona[] = [];
+  personaSeleccionada = new Persona();
+
   constructor(private personaService: PersonaService) { }
 
   ngOnInit() {
@@ -21,6 +23,18 @@ export class PeopleListComponent implements OnInit {
     }
 
   );
+  }
+
+  showModal(persona:Persona){
+    this.personaSeleccionada = persona;
+  }
+
+  eliminar(id:number){
+    this.personaService.eliminar(id).subscribe(
+      _=>{
+        this.personas = this.personas.filter(persona => persona != this.personaSeleccionada);
+      }
+    )
   }
 
 }
