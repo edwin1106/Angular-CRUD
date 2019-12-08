@@ -27,7 +27,7 @@ export class PeopleCreateComponent implements OnInit {
   }
 
   insert(){
-    this.personaService.insert(this.persona).subscribe(
+    this.personaService.insertar(this.persona).subscribe(
       _=>{
         this.router.navigate(["/people-list"]);
       }

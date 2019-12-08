@@ -10,6 +10,8 @@ import { PeopleCreateComponent } from './components/people-create/people-create.
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { PeopleUpdateComponent } from './components/people-update/people-update.component';
+import { PeopleSearchComponent } from './components/people-search/people-search.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {FormsModule} from '@angular/forms';
     NavbarComponent,
     HomeComponent,
     PeopleListComponent,
-    PeopleCreateComponent
+    PeopleCreateComponent,
+    PeopleUpdateComponent,
+    PeopleSearchComponent
   ],
   imports: [
     CommonModule,

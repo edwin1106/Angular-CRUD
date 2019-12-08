@@ -1,0 +1,103 @@
+<div class="card">
+  <div class="card-header">
+      Buscar Persona
+  </div>
+  <div class="card-body">
+      <blockquote class="blockquote mb-0">
+          <form (ngSubmit)="getByTipoDocumentoAndNroDocumento(tipoDocumentoIdentidad.id, nroDocumento)" #BuscadorForm="ngForm">
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label for="tipoDocumento">Tipo documento</label>
+                      <select class="form-control" id="tipoDocumentoIdentidad" name="tipoDocumentoIdentidad" [(ngModel)]="tipoDocumentoIdentidad" required>
+                          <option disabled>--Seleccione una opción--</option>
+                          <option *ngFor="let documento of tipoDocumentos" [ngValue]="documento">{{documento.nombre}}</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="nroDocumento">Numero documento</label>
+                    <input type="text" class="form-control" id="nroDocumento" placeholder="Número de documento" name="nroDocumento" [(ngModel)]="nroDocumento" minlength="3" #numeroDocumento="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched)">
+                        <div *ngIf="numeroDocumento?.errors.required">Numero de documento es requerido</div>
+                        <div *ngIf="numeroDocumento?.errors.minlength">Numero de documento debe terner al menos 3 caracteres</div>
+                    </div>
+                </div>
+
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!BuscadorForm.form.valid">Buscar</button>
+          </form>
+
+      </blockquote>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <div *ngIf="personas.length== 0">
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <h4>Ups...</h4>
+          <p>No se ha realizado ninguna busqueda</p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div *ngIf="personas.length > 0">
+        <p>Personas</p>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Tipo Documento</th>
+              <th scope="col">Numero Documento</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Teléfono</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let persona of personas">
+              <th scope="row">{{persona.id}}</th>
+              <td>{{persona.nombre | uppercase}}</td>
+              <td>{{persona.tipoDocumentoIdentidad.nombre | uppercase}}</td>
+              <td>{{persona.nroDocumento | uppercase}}</td>
+              <td>{{persona.apellido | uppercase}}</td>
+              <td>{{persona.telefono}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </blockquote>
+  </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Eliminar</h4>
+        <button type="button" class="close" data-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar la información?
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)= "eliminar(personaSeleccionada.id)" >Aceptar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

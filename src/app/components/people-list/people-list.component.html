@@ -22,9 +22,9 @@
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellidos</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Número</th>
+                    <th scope="col">Número de documento</th>
                     <th scope="col">Tipo de documento</th>
+                    <th scope="col">Teléfono</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -36,7 +36,7 @@
                     <td>{{persona.nroDocumento}}</td>
                     <td>{{persona.tipoDocumentoIdentidad.nombre}}</td>
                     <td>{{persona.telefono}}</td>
-                    <td><a href="#" class="btn btn-primary btn-lg">Editar</a>
+                    <td><a [routerLink]="['/people-update', persona.id]" class="btn btn-primary btn-lg">Editar</a>
                       <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" (click)="showModal(persona)">Eliminar</button>
                     </td>
                   </tr>
